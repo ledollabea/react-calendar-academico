@@ -7,5 +7,7 @@ export interface IGlobalContext {
   year: number,
   setYear: Dispatch<SetStateAction<number>>,
   daySelected: dayjs.Dayjs,
-  setDaySelected:Dispatch<SetStateAction<dayjs.Dayjs>>,
+  setDaySelected: Dispatch<SetStateAction<dayjs.Dayjs>>,
+  showEventModal: boolean,
+  setShowEventModal: Dispatch<SetStateAction<boolean>>,
 }

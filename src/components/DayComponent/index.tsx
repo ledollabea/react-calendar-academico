@@ -5,17 +5,19 @@ import { useContext } from 'react'
 import GlobalContext from '../../contexts/GlobalContext'
 import EventModalComponent from '../EventModalComponent'
 const DayComponent = ({ day }: IDay) => {
-  const { setDaySelected } = useContext(GlobalContext)
+  const { daySelected, setDaySelected, setShowEventModal } = useContext(GlobalContext)
+  
   const handleClick = () => {
     setDaySelected(day);
-    <EventModalComponent />
+    setShowEventModal(true);
   }
+
   return (
     <DayContainer onClick={() => handleClick()}>
       <HeaderDay>
         {
           day.format("DD-MM-YYYY") === dayjs().format("DD-MM-YYYY") ? 
-            <DayToday>
+          <DayToday>
               <small>
               {day.format('DD')}
               </small>

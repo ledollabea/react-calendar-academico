@@ -8,10 +8,11 @@ import MonthViewComponent from './components/MonthViewComponent';
 import CalendarHeaderComponent from './components/CalendarHeaderComponent';
 import { useContext, useEffect, useState } from 'react';
 import GlobalContext from './contexts/GlobalContext';
+import EventModalComponent from './components/EventModalComponent';
 function App() {
   const [currentMonth, setCurrentMonth] = useState(monthView());
   const [currentYear, setCurrentYear] = useState(monthView())
-  const { monthIndex, year, daySelected } = useContext(GlobalContext);
+  const { monthIndex, year, showEventModal } = useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonth(monthView(monthIndex, year))
@@ -20,6 +21,10 @@ function App() {
 
   return (
     <div className="App">
+      {
+        showEventModal && 
+        <EventModalComponent />
+      }
       <h3>Calendar</h3>
       <CalendarHeaderComponent/>
       <MonthViewComponent month={currentMonth} />
