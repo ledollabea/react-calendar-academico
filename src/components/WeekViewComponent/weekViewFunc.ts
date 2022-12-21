@@ -1,13 +1,12 @@
 import dayjs from "dayjs";
-import { monthView } from "../MonthViewComponent/monthViewFunc";
-const weekView = (date: dayjs.Dayjs) => {
- const selectedWeek = monthView().filter((week, index) => {
-   let teste = week.filter(dayOfWeek => dayOfWeek.format('DD-MM-YYYY')===(date.format('DD-MM-YYYY')))
-   if (teste.length > 0) {
-     return index
-   }
- });
-  return selectedWeek[0]
+
+const weekView = (day: dayjs.Dayjs = dayjs()) => {
+  const firstDayOfWeek = day.startOf('week');
+  const CalendarWeekArray = new Array(7).fill(null).map((day, i) => {
+        let currentDay = firstDayOfWeek.add(i,'day')
+        return currentDay;
+      });
+  return CalendarWeekArray; 
 }
 
 export { weekView }

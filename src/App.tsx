@@ -11,14 +11,16 @@ import GlobalContext from './contexts/GlobalContext';
 import EventModalComponent from './components/EventModalComponent';
 function App() {
   const [currentMonth, setCurrentMonth] = useState(monthView());
-  const [currentYear, setCurrentYear] = useState(monthView())
-  const { monthIndex, year, showEventModal } = useContext(GlobalContext);
+  const [currentYear, setCurrentYear] = useState(monthView());
+  const [currentWeek, setCurrentWeek] = useState(weekView());
+  const { monthIndex, year, showEventModal, daySelected, showMonthView, showWeekView } = useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonth(monthView(monthIndex, year))
     setCurrentYear(monthView(monthIndex,year))
-  }, [monthIndex, year])
-
+    setCurrentWeek(weekView(daySelected))
+  }, [monthIndex, year, daySelected])
+  console.log(daySelected.add(1,'week'))
   return (
     <div className="App">
       {
@@ -27,7 +29,9 @@ function App() {
       }
       <h3>Calendar</h3>
       <CalendarHeaderComponent/>
-      <MonthViewComponent month={currentMonth} />
+      
+      { showMonthView && <MonthViewComponent month={currentMonth} /> }
+      {showWeekView && <WeekViewComponent week={currentWeek}/>}
     </div>
   )
 }

@@ -10,4 +10,8 @@ export interface IGlobalContext {
   setDaySelected: Dispatch<SetStateAction<dayjs.Dayjs>>,
   showEventModal: boolean,
   setShowEventModal: Dispatch<SetStateAction<boolean>>,
+  showWeekView: boolean,
+  setShowWeekView: Dispatch<SetStateAction<boolean>>,
+  showMonthView: boolean,
+  setShowMonthView: Dispatch<SetStateAction<boolean>>,
 }
