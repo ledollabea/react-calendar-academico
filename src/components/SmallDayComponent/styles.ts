@@ -30,30 +30,30 @@ const DayToday = styled.div`
   padding: 3px;
 `;
 
-const DaysRow = styled.div`
+const Day = styled.div`
   display: flex;  
   justify-content: center;
   align-items: center;
-  height: 30px;
-  width: 100%;
+  width: 20px;
+  height: 18px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  padding: 3px;
 `;
 
-const DayContent = styled.div`
-  background-color: #E5EFF8;
+const MonthDaysRow = styled.div`
+  display: flex;  
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
   width: 100%;
-`
+  background-color: #E5EFF8;
+`;
 
 const DayHourBlock = styled.div`
   width: ${HOUR_WIDTH}px;
   height: 60px;
   border-top: #0000001c 1px solid;
-`
-
-const DayHourDivision = styled.div`
-  height: 60px;
-  border-top: #0000001c 1px solid;
-  display: flex;
-  width: 100%;
 `
 
 const EventCard = styled.div`
@@ -64,6 +64,8 @@ const EventCard = styled.div`
   color: white;
   border-radius: 3px;
   cursor: pointer;
+  width: 100%;
+  word-break: break-all;
 `
 
-export { DayContainer, HeaderDay, DayToday, DayContent, DayHourBlock, DayHourDivision, EventCard, DaysRow }
+export { DayContainer, HeaderDay, DayToday, DayHourBlock, EventCard, MonthDaysRow, Day }

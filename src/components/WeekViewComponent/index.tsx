@@ -1,19 +1,23 @@
-import DayComponent from "../DayComponent"
-import HeaderDays from "../HeaderDays"
-import { IWeek } from "./types"
+import DayComponent from "../DayComponent";
+import HourColumnComponent from "../HourColumnComponent";
+import { IWeek } from "./types";
 
-const WeekViewComponent = ({ week }: IWeek) => {
-  const STYLE_DIV = {
-    display: "flex"
-  }
+const WeekViewComponent = ({ week, events = [] }: IWeek) => {
+  const qWeek = week.map((day) => {
+    return {
+      day: day,
+      events: events.filter((_) => _.date.day() == day.day()),
+    };
+  });
+
   return (
     <>
-      <HeaderDays />
-      <div style={STYLE_DIV}>
-        {week.map((day, ind) => <DayComponent key={ind} day={day} />)}
-      </div>
+      <HourColumnComponent></HourColumnComponent>
+      {qWeek.map((day, ind) => (
+        <DayComponent key={ind} day={day.day} events={day.events} />
+      ))}
     </>
-  )
-}
+  );
+};
 
-export default WeekViewComponent
+export default WeekViewComponent;

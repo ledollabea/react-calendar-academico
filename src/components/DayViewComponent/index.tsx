@@ -1,10 +1,30 @@
-import React from 'react'
-import { IDay } from '../DayComponent/types'
+import DayComponent from "../DayComponent";
+import { DayHourBlock } from "../DayComponent/styles";
+import { IDay } from "../DayComponent/types";
+import HeaderDays from "../HeaderDays";
+import HourColumnComponent from "../HourColumnComponent";
 
-const DayViewComponent = ({day}:IDay) => {
+const DayViewComponent = ({ day, onlyOneDay, events }: IDay) => {
+  const dayList = onlyOneDay
+    ? [day]
+    : [day.subtract(1, "day"), day, day.add(1, "day")];
+
+  const hourList = [];
+
+  for (let i = 0; i < 24; i++) {
+    hourList.push({
+      description: `${i < 10 ? "0" : ""}${i}`,
+    });
+  }
+
   return (
-    <div>DayViewComponent</div>
-  )
-}
+    <>
+      <HourColumnComponent></HourColumnComponent>
+      {dayList.map((d: any, i: number) => {
+        return <DayComponent events={events} key={i} day={d} />;
+      })}
+    </>
+  );
+};
 
-export default DayViewComponent
+export default DayViewComponent;

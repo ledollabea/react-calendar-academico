@@ -2,12 +2,14 @@ import styled from "styled-components";
 
 const MonthContainer = styled.div`
   margin: 0;
-
+  width: 100%
 `;
 
 const RowContainer = styled.div`
   display: flex;
-  margin: 0;
+  margin-bottom: 3px;
+  width: 100%;
+  height: 19%;
 `;
 
 
