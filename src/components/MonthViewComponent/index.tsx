@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import GlobalContext from "../../contexts/GlobalContext";
 import DayComponent from "../DayComponent";
 import { QalendarEvent } from "../DayComponent/types";
@@ -8,6 +8,8 @@ import { MonthContainer, RowContainer } from "./styles";
 import { IMonth } from "./types";
 
 const MonthViewComponent = ({ month, events = [] }: IMonth) => {
+  const { isMobile } = useContext(GlobalContext)
+  console.log(isMobile)
   const eventList = events.filter(({ date }) => {
     return !!month.find(
       (i) =>
@@ -24,7 +26,7 @@ const MonthViewComponent = ({ month, events = [] }: IMonth) => {
               <SmallDayComponent
                 key={ind}
                 day={day}
-                smallView={true}
+                smallView={isMobile}
                 events={eventList}
               />
             ))}

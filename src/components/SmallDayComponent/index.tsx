@@ -1,10 +1,10 @@
 import { DailyQalendarEvent, IDay, QalendarEvent } from "./types";
-import { Day, DayContainer, DayToday, EventCard, MonthDaysRow } from "./styles";
+import { Day, DayContainer, DayToday, EventCard, MonthDaysRow, EventBall, EventList } from "./styles";
 import dayjs from "dayjs";
 import { useContext } from "react";
 import GlobalContext from "../../contexts/GlobalContext";
 
-const SmallDayComponent = ({ day, events = [] }: IDay) => {
+const SmallDayComponent = ({ day, events = [], smallView }: IDay) => {
   const { setDaySelected, setShowEventModal, daySelected } =
     useContext(GlobalContext);
 
@@ -39,15 +39,19 @@ const SmallDayComponent = ({ day, events = [] }: IDay) => {
             <small>{day.format("DD")}</small>
           </Day>
         )}
+        <EventList>
         {eventsList.map((event, i) => {
+          
           return (
-            <div key={i} style={{ width: "95%" }}>
-              <EventCard style={{ marginBottom: "3px" }}>
-                <small>{event.description}</small>
-              </EventCard>
-            </div>
-          );
-        })}
+            smallView ?
+            <EventBall/>
+            :
+          <EventCard key={i}>
+              <small>{event.description}</small>
+            </EventCard>
+            );
+          })}
+          </EventList>
       </MonthDaysRow>
     </DayContainer>
   );

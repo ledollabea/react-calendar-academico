@@ -12,6 +12,8 @@ export interface IGlobalContext {
   setShowEventModal: Dispatch<SetStateAction<boolean>>,
   showCalendarView: CalendarView,
   setShowCalendarView: Dispatch<SetStateAction<CalendarView>>,
+  isMobile: boolean,
+  setIsMobile: Dispatch<SetStateAction<boolean>>
 }
 
 export enum CalendarView {

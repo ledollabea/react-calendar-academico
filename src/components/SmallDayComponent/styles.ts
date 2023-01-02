@@ -47,7 +47,7 @@ const MonthDaysRow = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  background-color: #E5EFF8;
+  background-color: #fff;
 `;
 
 const DayHourBlock = styled.div`
@@ -64,8 +64,24 @@ const EventCard = styled.div`
   color: white;
   border-radius: 3px;
   cursor: pointer;
-  width: 100%;
+  width: 95%;
   word-break: break-all;
+  margin-bottom: 3px;
+  padding: 2px 0;
+`
+const EventBall = styled.div`
+  position: relative;
+  background-color: #0073db;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 6px;
+  height: 6px;
+  margin: 2px;
 `
 
-export { DayContainer, HeaderDay, DayToday, DayHourBlock, EventCard, MonthDaysRow, Day }
+const EventList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+export { DayContainer, HeaderDay, DayToday, DayHourBlock, EventCard, MonthDaysRow, Day, EventBall, EventList }

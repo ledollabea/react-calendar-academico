@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { useState, useEffect } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 import { CalendarView } from "./types";
@@ -11,6 +11,18 @@ const ContextWrapper = ({ children }: { children: JSX.Element }) => {
   //SET INITIAL VIEW
   const [showCalendarView, setShowCalendarView] = useState(CalendarView.MONTH);
   //////////////////
+
+  //SET SCREEN SIZE
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  const updateMedia = () => {
+    setIsMobile(window.innerWidth <=  768);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  });
+
   return (
     <GlobalContext.Provider
       value={{
@@ -24,6 +36,8 @@ const ContextWrapper = ({ children }: { children: JSX.Element }) => {
         setShowEventModal,
         showCalendarView,
         setShowCalendarView,
+        isMobile,
+        setIsMobile
       }}
     >
       {children}

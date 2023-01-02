@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { HOUR_WIDTH } from "../HourColumnComponent/styles";
 
+interface IProps {
+  screenType?: boolean
+}
+
 const DayContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -8,7 +12,6 @@ const DayContainer = styled.div`
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center
 `;
 
@@ -45,25 +48,45 @@ const DayContent = styled.div`
 
 const DayHourBlock = styled.div`
   width: ${HOUR_WIDTH}px;
-  height: 60px;
+  height: 40px;
   border-top: #0000001c 1px solid;
 `
 
 const DayHourDivision = styled.div`
-  height: 60px;
+  height: 40px;
   border-top: #0000001c 1px solid;
   display: flex;
   width: 100%;
 `
 
-const EventCard = styled.div`
-  position: relative;
+const EventCard = styled.div<IProps>`
+  ${(props) => props.screenType ? 
+  `position: relative;
+  background-color: #0073db;
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+  align-content: center;
+  cursor: pointer;
+  padding: 0.1px;
+  margin: 5px 2px;`
+  :
+  `position: relative;
   overflow-y: auto;
   text-overflow: ellipsis;
   background-color: #0073db;
   color: white;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer;`
+};
 `
 
-export { DayContainer, HeaderDay, DayToday, DayContent, DayHourBlock, DayHourDivision, EventCard, DaysRow }
+const DivTest = styled.div`
+  display: flex;
+  flex-wrap: wrap;  
+`; 
+
+export { DayContainer, HeaderDay, DayToday, DayContent, DayHourBlock, DayHourDivision, EventCard, DaysRow, DivTest }
