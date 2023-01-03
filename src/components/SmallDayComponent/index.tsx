@@ -4,6 +4,10 @@ import dayjs from "dayjs";
 import { useContext } from "react";
 import GlobalContext from "../../contexts/GlobalContext";
 
+interface IClick {
+  onClick: () => void
+}
+
 const SmallDayComponent = ({ day, events = [], smallView }: IDay) => {
   const { setDaySelected, setShowEventModal, daySelected } =
     useContext(GlobalContext);
@@ -26,16 +30,20 @@ const SmallDayComponent = ({ day, events = [], smallView }: IDay) => {
     setShowEventModal(true);
     console.log(daySelected);
   };
+ 
+  const handleCard = () => {
+    
+  }
 
   return (
-    <DayContainer onClick={() => handleClick()}>
+    <DayContainer >
       <MonthDaysRow>
         {day.format("DD-MM-YYYY") === dayjs().format("DD-MM-YYYY") ? (
-          <DayToday>
+          <DayToday onClick={() => handleClick()}>
             <small>{day.format("DD")}</small>
           </DayToday>
         ) : (
-          <Day>
+          <Day onClick={() => handleClick()}>
             <small>{day.format("DD")}</small>
           </Day>
         )}
@@ -44,11 +52,11 @@ const SmallDayComponent = ({ day, events = [], smallView }: IDay) => {
           
           return (
             smallView ?
-            <EventBall/>
-            :
-          <EventCard key={i}>
-              <small>{event.description}</small>
-            </EventCard>
+              <EventBall key={i} onClick={() => handleCard()}/>
+              :
+              <EventCard key={i}  onClick={() => handleCard()}>
+                <small>{event.description}</small>
+              </EventCard>
             );
           })}
           </EventList>

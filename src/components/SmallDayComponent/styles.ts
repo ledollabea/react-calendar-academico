@@ -73,9 +73,10 @@ const EventBall = styled.div`
   position: relative;
   background-color: #0073db;
   border-radius: 50%;
+  font-size: 10px;
   cursor: pointer;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 12px;
   margin: 2px;
 `
 
