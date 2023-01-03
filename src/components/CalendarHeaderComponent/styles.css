@@ -38,3 +38,7 @@ button {
 .dropdown:hover .dropbtn {
   background-color: #E5EFF8;
 }
+
+.BLA{
+  display: flex;
+}

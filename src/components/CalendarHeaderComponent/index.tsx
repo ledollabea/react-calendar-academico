@@ -5,6 +5,8 @@ import { Header } from "./styles";
 import { FiCalendar, FiFilter } from "react-icons/fi";
 import "./styles.css";
 import { CalendarView } from "../../contexts/types";
+import { GrNext, GrPrevious } from "react-icons/gr";
+
 const CalendarHeaderComponent = () => {
   const {
     monthIndex,
@@ -15,6 +17,7 @@ const CalendarHeaderComponent = () => {
     setShowCalendarView,
     setDaySelected,
     daySelected,
+    isMobile
   } = useContext(GlobalContext);
 
   const handlePreviousMonth = () => {
@@ -47,16 +50,10 @@ const CalendarHeaderComponent = () => {
     setDaySelected(daySelected.subtract(1, "week"));
   };
 
+
   return (
+    isMobile ?
     <Header>
-      {/* <ButtonsContainer>
-        <button onClick={handlePreviousYear}> {"<<"}  </button>
-        <button onClick={handlePreviousMonth}> {"<"}  </button>
-        <button onClick={handleToday}>Hoje</button>
-        <button onClick={handleNextMonth}> {">"}  </button>
-        <button onClick={handleNextYear}> {">>"}  </button>
-      </ButtonsContainer>
-      */}
       <h3>
         {showCalendarView == CalendarView.MONTH &&
           dayjs(new Date(year, monthIndex)).format("MMMM, YYYY")}
@@ -93,7 +90,39 @@ const CalendarHeaderComponent = () => {
           </div>
         </div>
       </div>
-    </Header>
+      </Header>
+      :
+      <Header>
+        <div>
+          <h3>
+            {showCalendarView == CalendarView.MONTH &&
+              dayjs(new Date(year, monthIndex)).format("MMMM, YYYY")}
+            {showCalendarView == CalendarView.WEEK &&
+              daySelected.format("MMMM, YYYY")}
+            {showCalendarView == CalendarView.DAY &&
+              daySelected.format("MMMM, YYYY")}
+            
+            {showCalendarView == CalendarView.MONTH && (
+              <GrPrevious onClick={handlePreviousMonth} />
+            )}
+            {showCalendarView == CalendarView.WEEK && (
+              <GrPrevious onClick={() => handlePreviousWeek} />
+            )}
+            {showCalendarView == CalendarView.MONTH && (
+               <GrNext onClick={handleNextMonth} />
+            )}
+            {showCalendarView == CalendarView.WEEK && (
+               <GrNext onClick={handleNextWeek} />
+            )}
+          </h3>
+        </div>
+      <div className="BLA">
+        <button onClick={handleDayView}>Diário</button>
+        <button onClick={handleWeekView}>Semanal</button>
+        <button onClick={handleMonthView}>Mensal</button>
+      </div>
+      </Header>
+    
   );
 };
 
