@@ -11,7 +11,9 @@ const ContextWrapper = ({ children }: { children: JSX.Element }) => {
   //SET INITIAL VIEW
   const [showCalendarView, setShowCalendarView] = useState(CalendarView.MONTH);
   //////////////////
-
+  // CHOICE FOR EDIT EVENT
+  const [showEditEventModal, setShowEditEventModal] = useState(false);
+  const [eventSelected, setEventSelected] = useState({});
   //SET SCREEN SIZE
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -37,7 +39,11 @@ const ContextWrapper = ({ children }: { children: JSX.Element }) => {
         showCalendarView,
         setShowCalendarView,
         isMobile,
-        setIsMobile
+        setIsMobile,
+        showEditEventModal,
+        setShowEditEventModal,
+        eventSelected,
+        setEventSelected
       }}
     >
       {children}

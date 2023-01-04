@@ -1,5 +1,6 @@
 import dayjs from "dayjs"
 import { Dispatch, SetStateAction } from "react"
+import { QalendarEvent } from "../components/DayComponent/types"
 
 export interface IGlobalContext {
   monthIndex: number,
@@ -13,7 +14,11 @@ export interface IGlobalContext {
   showCalendarView: CalendarView,
   setShowCalendarView: Dispatch<SetStateAction<CalendarView>>,
   isMobile: boolean,
-  setIsMobile: Dispatch<SetStateAction<boolean>>
+  setIsMobile: Dispatch<SetStateAction<boolean>>,
+  showEditEventModal: boolean,
+  setShowEditEventModal: Dispatch<SetStateAction<boolean>>,
+  eventSelected: QalendarEvent,
+  setEventSelected: Dispatch<SetStateAction<QalendarEvent>>
 }
 
 export enum CalendarView {

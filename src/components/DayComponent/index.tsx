@@ -11,7 +11,7 @@ import {
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import GlobalContext from "../../contexts/GlobalContext";
 import EventModalComponent from "../EventModalComponent";
 
@@ -19,9 +19,9 @@ dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
 const DayComponent = ({ day, events = [], smallView }: IDay) => {
-  const { setDaySelected, setShowEventModal, isMobile } =
+  const { isMobile, setEventSelected, setShowEditEventModal, showEventModal, showEditEventModal } =
     useContext(GlobalContext);
-
+  
   const isBetween = (
     value: dayjs.Dayjs,
     min: dayjs.Dayjs,
@@ -29,7 +29,6 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
   ) => {
     return value.isSameOrAfter(min) && value.isSameOrBefore(max);
   };
-  console.log(smallView)
   const dateIsBetween = (
     min1: dayjs.Dayjs,
     max1: dayjs.Dayjs,
@@ -49,7 +48,7 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
     .map((event: QalendarEvent) => {
       let conflicts = events
         .map((event2, i) => {
-          if (dateIsBetween(event.start, event.end, event2.start, event2.end)) {
+          if (dateIsBetween(event.start!, event.end!, event2.start, event2.end)) {
             return i;
           } else {
             return -1;
@@ -57,7 +56,7 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
         })
         .filter((_) => _ != -1);
 
-      let duration = event.end.diff(event.start, "minute");
+      let duration = event.end!.diff(event.start, "minute");
       const qalendarEvent: DailyQalendarEvent = {
         ...event,
         duration: duration,
@@ -70,15 +69,18 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
   const hourList = [];
   for (let i = 0; i < 24; i++) {
     hourList.push({
-      eventList: eventsList.filter((event) => event.start.hour() == i),
+      eventList: eventsList.filter((event) => event.start!.hour() == i),
     });
   }
 
-  const handleClick = () => {
-    setDaySelected(day);
-    setShowEventModal(true);
-    // console.log(daySelected);
-  };
+  
+  const handleEventSelect = (event: QalendarEvent) => {
+    if (!showEventModal) {
+      setShowEditEventModal(true)
+    }
+    setEventSelected(event)
+  }
+  
 
   const calculateLeft = (
     qevent: DailyQalendarEvent,
@@ -98,7 +100,7 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
   };
 
   return (
-    <DayContainer onClick={() => handleClick()}>
+    <DayContainer >
       <DaysRow>
         {day.format("DD-MM-YYYY") === dayjs().format("DD-MM-YYYY") ? (
           <DayToday>
@@ -115,11 +117,11 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
           smallView ?
             (hourList.map((hour, i) => {
               return (
-                <DayHourDivision key={i}>
+                <DayHourDivision key={i} >
                   <DivTest>
                   {hour.eventList.map((event, j) => (
                     <>
-                      <EventCard key={j} screenType={isMobile}> <small>{event.description[0]}</small></EventCard>
+                      <EventCard key={j} screenType={isMobile} onClick={() => handleEventSelect(event)}> <small>{event.description![0]}</small></EventCard>
                     </>
                   ))}
                 </DivTest>
@@ -131,13 +133,13 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
             
             (hourList.map((hour, i) => {
               return (
-                <DayHourDivision key={i}>
+                <DayHourDivision key={i} >
                   {hour.eventList.map((event, j) => {
                     return (
                       <EventCard
                         key={j}
                         style={{
-                          top: `${event.start.minute()}px`,
+                          top: `${event.start!.minute()}px`,
                           height: `${event.duration}px`,
                           width: `${100 / event.conflicts.length}%`,
                           left: `${calculateLeft(
@@ -146,6 +148,7 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
                             hour.eventList
                           )}%`,
                         }} screenType = {isMobile}
+                        onClick={() => handleEventSelect(event)}
                       >
   
                         <div>
@@ -153,8 +156,8 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
                         </div>
                         <div>
                           <small>
-                            De {event.start.format("HH:mm")} às{" "}
-                            {event.end.format("HH:mm")}
+                            De {event.start!.format("HH:mm")} às{" "}
+                            {event.end!.format("HH:mm")}
                           </small>
                         </div>
                       </EventCard>

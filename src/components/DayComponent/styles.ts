@@ -48,12 +48,12 @@ const DayContent = styled.div`
 
 const DayHourBlock = styled.div`
   width: ${HOUR_WIDTH}px;
-  height: 40px;
+  height: 60px;
   border-top: #0000001c 1px solid;
 `
 
 const DayHourDivision = styled.div`
-  height: 40px;
+  height: 60px;
   border-top: #0000001c 1px solid;
   display: flex;
   width: 100%;

@@ -1,5 +1,4 @@
 import { DayHourBlock } from "../DayComponent/styles";
-import { IDay } from "../DayComponent/types";
 import { HourColumn } from "./styles";
 
 const HourColumnComponent = () => {
@@ -12,7 +11,7 @@ const HourColumnComponent = () => {
   }
 
   return (
-    <HourColumn>
+    <HourColumn  >
       {hourList.map((hour, i) => {
         return (
           <DayHourBlock key={i}>

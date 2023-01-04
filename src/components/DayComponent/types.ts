@@ -8,11 +8,12 @@ export interface IDay {
 }
 
 export interface QalendarEvent {
-  id: number,
-  start: dayjs.Dayjs;
-  end: dayjs.Dayjs;
-  description: string;
-  date: dayjs.Dayjs;
+  id?: number;
+  start?: dayjs.Dayjs;
+  end?: dayjs.Dayjs;
+  description?: string;
+  date?: dayjs.Dayjs;
+  type?: string;
 }
 
 export interface DailyQalendarEvent extends QalendarEvent {

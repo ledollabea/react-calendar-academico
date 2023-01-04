@@ -5,11 +5,11 @@ import HourColumnComponent from "../HourColumnComponent";
 import { IWeek } from "./types";
 
 const WeekViewComponent = ({ week, events = [] }: IWeek) => {
-  const { isMobile } = useContext(GlobalContext)
+  const { isMobile, } = useContext(GlobalContext)
   const qWeek = week.map((day) => {
     return {
       day: day,
-      events: events.filter((_) => _.date.day() == day.day()),
+      events: events.filter((_) => _.date!.day() == day.day()),
     };
   });
 

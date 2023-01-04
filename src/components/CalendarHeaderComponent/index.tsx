@@ -3,9 +3,10 @@ import { useContext } from "react";
 import GlobalContext from "../../contexts/GlobalContext";
 import { Header } from "./styles";
 import { FiCalendar, FiFilter } from "react-icons/fi";
+import { GrNext, GrPrevious } from "react-icons/gr";
+import { GoPlus } from "react-icons/go";
 import "./styles.css";
 import { CalendarView } from "../../contexts/types";
-import { GrNext, GrPrevious } from "react-icons/gr";
 
 const CalendarHeaderComponent = () => {
   const {
@@ -17,7 +18,9 @@ const CalendarHeaderComponent = () => {
     setShowCalendarView,
     setDaySelected,
     daySelected,
-    isMobile
+    isMobile, 
+    showEventModal,
+    setShowEventModal
   } = useContext(GlobalContext);
 
   const handlePreviousMonth = () => {
@@ -50,48 +53,58 @@ const CalendarHeaderComponent = () => {
     setDaySelected(daySelected.subtract(1, "week"));
   };
 
+  const handleClick = () => {
+    setShowEventModal(true)
+  }
+
 
   return (
     isMobile ?
-    <Header>
-      <h3>
-        {showCalendarView == CalendarView.MONTH &&
-          dayjs(new Date(year, monthIndex)).format("MMMM, YYYY")}
-        {showCalendarView == CalendarView.WEEK &&
-          daySelected.format("MMMM, YYYY")}
-        {showCalendarView == CalendarView.DAY &&
-          daySelected.format("MMMM, YYYY")}
-      </h3>
-      <div>
-        <div className="dropdown">
-          <FiCalendar className="dropbtn" />
-          <div className="dropdown-content">
-            <button onClick={handleDayView}>Diário</button>
-            <button onClick={handleWeekView}>Semanal</button>
-            <button onClick={handleMonthView}>Mensal</button>
+    <>
+      <Header>
+        <h3>
+          {showCalendarView == CalendarView.MONTH &&
+            dayjs(new Date(year, monthIndex)).format("MMMM, YYYY")}
+          {showCalendarView == CalendarView.WEEK &&
+            daySelected.format("MMMM, YYYY")}
+          {showCalendarView == CalendarView.DAY &&
+            daySelected.format("MMMM, YYYY")}
+        </h3>
+        <div>
+          <div className="dropdown">
+            <FiCalendar className="dropbtn" />
+            <div className="dropdown-content">
+              <button onClick={handleDayView}>Diário</button>
+              <button onClick={handleWeekView}>Semanal</button>
+              <button onClick={handleMonthView}>Mensal</button>
+            </div>
+          </div>
+          <div className="dropdown">
+            <FiFilter className="dropbtn" />
+            <div className="dropdown-content">
+              {showCalendarView == CalendarView.MONTH && (
+                <button onClick={handlePreviousMonth}> Mês Anterior </button>
+                )}
+              {showCalendarView == CalendarView.WEEK && (
+                <button onClick={handlePreviousWeek}> Semana Anterior </button>
+                )}
+                <button onClick={handleToday}>Hoje</button>
+              {showCalendarView == CalendarView.MONTH && (
+                <button onClick={handleNextMonth}> Próximo Mês </button>
+                )}
+              {showCalendarView == CalendarView.WEEK && (
+                <button onClick={handleNextWeek}> Próxima Semana </button>
+                )}
+            </div>
           </div>
         </div>
-        <div className="dropdown">
-          <FiFilter className="dropbtn" />
-          <div className="dropdown-content">
-            {showCalendarView == CalendarView.MONTH && (
-              <button onClick={handlePreviousMonth}> Mês Anterior </button>
-            )}
-            {showCalendarView == CalendarView.WEEK && (
-              <button onClick={handlePreviousWeek}> Semana Anterior </button>
-            )}
-            <button onClick={handleToday}>Hoje</button>
-            {showCalendarView == CalendarView.MONTH && (
-              <button onClick={handleNextMonth}> Próximo Mês </button>
-            )}
-            {showCalendarView == CalendarView.WEEK && (
-              <button onClick={handleNextWeek}> Próxima Semana </button>
-            )}
-          </div>
-        </div>
-      </div>
-      </Header>
+        </Header>
+        <button onClick={handleClick}>
+         <GoPlus/> Novo Evento
+        </button>
+      </>
       :
+      <>
       <Header>
         <div>
           <h3>
@@ -103,16 +116,16 @@ const CalendarHeaderComponent = () => {
               daySelected.format("MMMM, YYYY")}
             
             {showCalendarView == CalendarView.MONTH && (
-              <GrPrevious onClick={handlePreviousMonth} />
+              <>
+                <GrPrevious onClick={handlePreviousMonth} />
+                <GrNext onClick={handleNextMonth} />
+              </>
             )}
             {showCalendarView == CalendarView.WEEK && (
-              <GrPrevious onClick={() => handlePreviousWeek} />
-            )}
-            {showCalendarView == CalendarView.MONTH && (
-               <GrNext onClick={handleNextMonth} />
-            )}
-            {showCalendarView == CalendarView.WEEK && (
-               <GrNext onClick={handleNextWeek} />
+              <>
+                <GrPrevious onClick={handlePreviousWeek} />
+                <GrNext onClick={handleNextWeek} />
+              </>
             )}
           </h3>
         </div>
@@ -122,6 +135,10 @@ const CalendarHeaderComponent = () => {
         <button onClick={handleMonthView}>Mensal</button>
       </div>
       </Header>
+     <button onClick={handleClick}>
+     Novo Evento
+    </button>
+    </>
     
   );
 };
