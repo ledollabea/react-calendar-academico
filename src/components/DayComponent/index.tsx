@@ -2,7 +2,6 @@ import { DailyQalendarEvent, IDay, QalendarEvent } from "./types";
 import {
   DayContainer,
   DayContent,
-  DayHourBlock,
   DayHourDivision,
   DaysRow,
   DayToday,
@@ -13,7 +12,6 @@ import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import { useContext, useState } from "react";
 import GlobalContext from "../../contexts/GlobalContext";
-import EventModalComponent from "../EventModalComponent";
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
@@ -21,7 +19,7 @@ dayjs.extend(isSameOrBefore);
 const DayComponent = ({ day, events = [], smallView }: IDay) => {
   const { isMobile, setEventSelected, setShowEditEventModal, showEventModal, showEditEventModal } =
     useContext(GlobalContext);
-  
+    
   const isBetween = (
     value: dayjs.Dayjs,
     min: dayjs.Dayjs,
@@ -100,7 +98,8 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
   };
 
   return (
-    <DayContainer >
+    <DivTest>
+      <>
       <DaysRow>
         {day.format("DD-MM-YYYY") === dayjs().format("DD-MM-YYYY") ? (
           <DayToday>
@@ -111,68 +110,54 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
             <small>{day.format("DD")}</small>
           </div>
         )}
-      </DaysRow>
+        </DaysRow>
       <DayContent>
-        {
-          smallView ?
-            (hourList.map((hour, i) => {
-              return (
-                <DayHourDivision key={i} >
-                  <DivTest>
-                  {hour.eventList.map((event, j) => (
-                    <>
-                      <EventCard key={j} screenType={isMobile} onClick={() => handleEventSelect(event)}> <small>{event.description![0]}</small></EventCard>
-                    </>
-                  ))}
-                </DivTest>
-                 </DayHourDivision>
-              );
-            })
-              )
-            :
+        {(!smallView) ?
             
             (hourList.map((hour, i) => {
               return (
                 <DayHourDivision key={i} >
-                  {hour.eventList.map((event, j) => {
-                    return (
-                      <EventCard
-                        key={j}
-                        style={{
-                          top: `${event.start!.minute()}px`,
-                          height: `${event.duration}px`,
-                          width: `${100 / event.conflicts.length}%`,
-                          left: `${calculateLeft(
-                            event,
-                            eventsList,
-                            hour.eventList
-                          )}%`,
-                        }} screenType = {isMobile}
-                        onClick={() => handleEventSelect(event)}
-                      >
-  
-                        <div>
+                {hour.eventList.map((event, j) => {
+                  return (
+                    <EventCard
+                    key={j}
+                    style={{
+                      top: `${event.start!.minute()}px`,
+                      height: `${event.duration}px`,
+                      width: `${100 / event.conflicts.length}%`,
+                      left: `${calculateLeft(
+                        event,
+                        eventsList,
+                        hour.eventList
+                        )}%`,
+                      }} screenType={isMobile} 
+                      type={event.type}
+                      onClick={() => handleEventSelect(event)}
+                          >
+                          
+                          <div>
                           <small>{event.description}:</small>
-                        </div>
-                        <div>
+                          </div>
+                          <div>
                           <small>
-                            De {event.start!.format("HH:mm")} às{" "}
-                            {event.end!.format("HH:mm")}
+                          De {event.start!.format("HH:mm")} às{" "}
+                          {event.end!.format("HH:mm")}
                           </small>
-                        </div>
-                      </EventCard>
-                    );
-                  })}
+                          </div>
+                          </EventCard>
+                          );
+                })
+              }
                 </DayHourDivision>
               );
             })
-              ) 
-        
-        
-        
-        }
-      </DayContent>
-    </DayContainer>
+            ) 
+            : <></>
+            
+          }
+        </DayContent>
+    </>
+  </DivTest>
   );
 };
 

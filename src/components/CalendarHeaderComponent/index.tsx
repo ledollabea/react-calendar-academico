@@ -74,32 +74,32 @@ const CalendarHeaderComponent = () => {
           <div className="dropdown">
             <FiCalendar className="dropbtn" />
             <div className="dropdown-content">
-              <button onClick={handleDayView}>Diário</button>
-              <button onClick={handleWeekView}>Semanal</button>
-              <button onClick={handleMonthView}>Mensal</button>
+              <button className="btn-header" onClick={handleDayView}>Diário</button>
+              <button className="btn-header" onClick={handleWeekView}>Semanal</button>
+              <button className="btn-header" onClick={handleMonthView}>Mensal</button>
             </div>
           </div>
           <div className="dropdown">
             <FiFilter className="dropbtn" />
             <div className="dropdown-content">
               {showCalendarView == CalendarView.MONTH && (
-                <button onClick={handlePreviousMonth}> Mês Anterior </button>
+                <button className="btn-header" onClick={handlePreviousMonth}> Mês Anterior </button>
                 )}
               {showCalendarView == CalendarView.WEEK && (
-                <button onClick={handlePreviousWeek}> Semana Anterior </button>
+                <button className="btn-header" onClick={handlePreviousWeek}> Semana Anterior </button>
                 )}
-                <button onClick={handleToday}>Hoje</button>
+                <button className="btn-header" onClick={handleToday}>Hoje</button>
               {showCalendarView == CalendarView.MONTH && (
-                <button onClick={handleNextMonth}> Próximo Mês </button>
+                <button className="btn-header" onClick={handleNextMonth}> Próximo Mês </button>
                 )}
               {showCalendarView == CalendarView.WEEK && (
-                <button onClick={handleNextWeek}> Próxima Semana </button>
+                <button className="btn-header" onClick={handleNextWeek}> Próxima Semana </button>
                 )}
             </div>
           </div>
         </div>
         </Header>
-        <button onClick={handleClick}>
+        <button className="btn-newevent" onClick={handleClick}>
          <GoPlus/> Novo Evento
         </button>
       </>
@@ -130,13 +130,13 @@ const CalendarHeaderComponent = () => {
           </h3>
         </div>
       <div className="BLA">
-        <button onClick={handleDayView}>Diário</button>
-        <button onClick={handleWeekView}>Semanal</button>
-        <button onClick={handleMonthView}>Mensal</button>
+        <button className="btn-header" onClick={handleDayView}>Diário</button>
+        <button className="btn-header" onClick={handleWeekView}>Semanal</button>
+        <button className="btn-header" onClick={handleMonthView}>Mensal</button>
       </div>
       </Header>
-     <button onClick={handleClick}>
-     Novo Evento
+     <button className="btn-newevent" onClick={handleClick}>
+      <GoPlus/> Novo Evento
     </button>
     </>
     

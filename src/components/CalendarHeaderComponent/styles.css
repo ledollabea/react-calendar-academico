@@ -24,7 +24,7 @@
   text-decoration: none;
   display: block;
 }
-button {
+.btn-header {
   background-color: #f9f9f9;
   border: none;
   width: 100%;
@@ -33,12 +33,20 @@ button {
 
 .dropdown:hover .dropdown-content {
   display: block;
+  left: -35px;
 }
 
 .dropdown:hover .dropbtn {
   background-color: #E5EFF8;
 }
 
+.btn-newevent{
+  border: none;
+  width: 300px;
+  padding:  10px;
+  margin-bottom: 10px;
+
+}
 .BLA{
   display: flex;
 }

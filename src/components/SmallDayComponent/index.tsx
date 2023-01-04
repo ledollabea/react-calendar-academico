@@ -44,9 +44,9 @@ const SmallDayComponent = ({ day, events = [], smallView }: IDay) => {
           
           return (
             smallView ?
-              <EventBall key={i} onClick={() => handleEventSelect(event)}/>
+              <EventBall type={event.type} key={i} onClick={() => handleEventSelect(event)}/>
               :
-              <EventCard key={i}  onClick={() => handleEventSelect(event)}>
+              <EventCard key={i} type={event.type} onClick={() => handleEventSelect(event)}>
                 <small>{event.description}</small>
               </EventCard>
             );

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { HOUR_WIDTH } from "../HourColumnComponent/styles";
+import { IProps } from "./types";
 
 const DayContainer = styled.div`
   width: 100%;
@@ -56,11 +57,11 @@ const DayHourBlock = styled.div`
   border-top: #0000001c 1px solid;
 `
 
-const EventCard = styled.div`
+const EventCard = styled.div<IProps>`
+${(props) => props.type == "aula" ? `background: #ffcc66` : props.type == "feriado" ? `background: #AEBCCD` : `background: #9999cc` };
   position: relative;
   overflow-y: auto;
   text-overflow: ellipsis;
-  background-color: #0073db;
   color: white;
   border-radius: 3px;
   cursor: pointer;
@@ -69,9 +70,9 @@ const EventCard = styled.div`
   margin-bottom: 3px;
   padding: 2px 0;
 `
-const EventBall = styled.div`
+const EventBall = styled.div<IProps>`
+${(props) => props.type == "aula" ? `background: #ffcc66` : props.type == "feriado" ? `background: #AEBCCD` : `background: #9999cc` };
   position: relative;
-  background-color: #0073db;
   border-radius: 50%;
   font-size: 10px;
   cursor: pointer;

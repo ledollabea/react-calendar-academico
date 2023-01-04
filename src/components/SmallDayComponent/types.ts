@@ -13,9 +13,15 @@ export interface QalendarEvent {
   end: dayjs.Dayjs;
   description: string;
   date: dayjs.Dayjs;
+  type: string;
 }
 
 export interface DailyQalendarEvent extends QalendarEvent {
   duration: number;
   conflicts: (number | null)[];
+}
+
+export interface IProps {
+  screenType?: boolean;
+  type?: string;
 }

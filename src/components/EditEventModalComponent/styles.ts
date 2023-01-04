@@ -14,11 +14,9 @@ const ModalContainer = styled.div`
 `;
 
 const FormModal = styled.form`
-  position: fixed;
-  top: 25%;
-  left: 25%;
-  right: -25%;
-  bottom: -25%;
+  position: absolute;
+  margin: auto;
+  inset: 0;
   background: #fff;
   border: 1px solid black;
   height: fit-content;

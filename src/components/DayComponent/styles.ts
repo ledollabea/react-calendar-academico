@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { HOUR_WIDTH } from "../HourColumnComponent/styles";
 
 interface IProps {
-  screenType?: boolean
+  screenType?: boolean;
+  type?: string;
 }
 
 const DayContainer = styled.div`
@@ -42,7 +43,7 @@ const DaysRow = styled.div`
 `;
 
 const DayContent = styled.div`
-  background-color: #E5EFF8;
+  background-color: #0000001c;
   width: 100%;
 `
 
@@ -55,38 +56,25 @@ const DayHourBlock = styled.div`
 const DayHourDivision = styled.div`
   height: 60px;
   border-top: #0000001c 1px solid;
+  background-color: white;
   display: flex;
   width: 100%;
 `
 
 const EventCard = styled.div<IProps>`
-  ${(props) => props.screenType ? 
-  `position: relative;
-  background-color: #0073db;
-  font-size: 12px;
-  color: white;
-  font-weight: bold;
-  border-radius: 50%;
-  width: 13px;
-  height: 13px;
-  align-content: center;
-  cursor: pointer;
-  padding: 0.1px;
-  margin: 5px 2px;`
-  :
-  `position: relative;
+  ${(props) => props.type == "aula" ? `background: #ffcc66` : props.type == "feriado" ? `background: #AEBCCD` : `background: #9999cc`};
+  position: relative;
   overflow-y: auto;
   text-overflow: ellipsis;
-  background-color: #0073db;
   color: white;
   border-radius: 3px;
-  cursor: pointer;`
-};
-`
+  cursor: pointer;
+`;
 
-const DivTest = styled.div`
-  display: flex;
-  flex-wrap: wrap;  
+const DivTest = styled.div` 
+  width: 100%;
+  padding-left: 20px;
 `; 
+
 
 export { DayContainer, HeaderDay, DayToday, DayContent, DayHourBlock, DayHourDivision, EventCard, DaysRow, DivTest }

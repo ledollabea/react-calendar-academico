@@ -100,7 +100,6 @@ function App() {
     <div className="App">
       {showEventModal && <EventModalComponent />}
       {showEditEventModal && <EditEventModalComponent/>}
-      <h3>Qalendar</h3>
       <CalendarHeaderComponent />
 
       {showCalendarView == CalendarView.DAY ? (
