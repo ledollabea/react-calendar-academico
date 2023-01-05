@@ -15,6 +15,8 @@ import { CalendarView } from "./contexts/types";
 import { QalendarEvent } from "./components/DayComponent/types";
 import HeaderDays from "./components/HeaderDays";
 import EditEventModalComponent from "./components/EditEventModalComponent";
+import ListDayComponent from "./components/ListDayComponent";
+import ListWeekComponent from "./components/ListWeekComponent";
 function App() {
   const [currentMonth, setCurrentMonth] = useState(monthView());
   const [currentYear, setCurrentYear] = useState(monthView());
@@ -85,7 +87,10 @@ function App() {
         );
 
       case CalendarView.WEEK:
-        return <WeekViewComponent week={currentWeek} events={eventsList} />;
+        return <>
+          <WeekViewComponent week={currentWeek} events={eventsList} />
+          <ListWeekComponent week={currentWeek} events={eventsList}/>
+          </>
 
       case CalendarView.MONTH:
         return <MonthViewComponent month={currentMonth} events={eventsList} />;
@@ -100,13 +105,17 @@ function App() {
     <div className="App">
       {showEventModal && <EventModalComponent />}
       {showEditEventModal && <EditEventModalComponent/>}
+      
       <CalendarHeaderComponent />
 
-      {showCalendarView == CalendarView.DAY ? (
+      {
+        showCalendarView == CalendarView.DAY ? (
         <HeaderDays days={[currentDay]} onlyOneDay={false} />
       ) : (
-        <HeaderDays withoutHours={showCalendarView == CalendarView.MONTH} />
-      )}
+        showCalendarView == CalendarView.MONTH ?
+       ( <HeaderDays withoutHours={showCalendarView == CalendarView.MONTH} />
+          ) : (<></>))
+     }
 
       <div
         style={{

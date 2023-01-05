@@ -51,6 +51,8 @@ const DayHourBlock = styled.div`
   width: ${HOUR_WIDTH}px;
   height: 60px;
   border-top: #0000001c 1px solid;
+  padding: 0;
+
 `
 
 const DayHourDivision = styled.div`
@@ -59,6 +61,7 @@ const DayHourDivision = styled.div`
   background-color: white;
   display: flex;
   width: 100%;
+  padding: 0;
 `
 
 const EventCard = styled.div<IProps>`
@@ -73,8 +76,14 @@ const EventCard = styled.div<IProps>`
 
 const DivTest = styled.div` 
   width: 100%;
-  padding-left: 20px;
 `; 
 
+const Day = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  height: 40px;
+  margin: 10px;
+`;
 
-export { DayContainer, HeaderDay, DayToday, DayContent, DayHourBlock, DayHourDivision, EventCard, DaysRow, DivTest }
+export { DayContainer, HeaderDay, DayToday, DayContent, DayHourBlock, DayHourDivision, EventCard, DaysRow, DivTest, Day }

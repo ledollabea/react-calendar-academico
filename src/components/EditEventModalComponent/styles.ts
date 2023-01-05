@@ -18,10 +18,11 @@ const FormModal = styled.form`
   margin: auto;
   inset: 0;
   background: #fff;
-  border: 1px solid black;
+  border: 1px solid #0000001c;
+  border-radius: 5px;
   height: fit-content;
   width: fit-content;
-  padding: 10px;
+  padding: 20px 30px;
   z-index: 3;
 `;
 
@@ -32,5 +33,29 @@ const LabelForm = styled.label`
   background: white;
 `;
 
+const Header = styled.header`
+  display: flex;
+  justify-content: right;
+`;
 
-export {ModalContainer, FormModal, LabelForm}
+const Button = styled.button`
+  border: none;
+  background: transparent;
+  padding: 5px 10px;
+  justify-content: center;
+`;
+
+const Small = styled.small`
+  width: 40px;
+`;
+
+const Creation = styled.button`
+  border-radius: 5px;
+  border: black 1px solid;
+  background: transparent;
+  padding: 5px 10px;
+  margin-top: 10px;
+  width: 100%;
+`;
+
+export {ModalContainer, FormModal, LabelForm, Header, Button, Small, Creation}

@@ -5,7 +5,7 @@ import {
   DayHourDivision,
   DaysRow,
   DayToday,
-  EventCard, DivTest
+  EventCard, DivTest, Day
 } from "./styles";
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
@@ -16,10 +16,10 @@ import GlobalContext from "../../contexts/GlobalContext";
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-const DayComponent = ({ day, events = [], smallView }: IDay) => {
+const DayComponent = ({ day, events = [], smallView, dayView }: IDay) => {
   const { isMobile, setEventSelected, setShowEditEventModal, showEventModal, showEditEventModal } =
     useContext(GlobalContext);
-    
+  const Days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]
   const isBetween = (
     value: dayjs.Dayjs,
     min: dayjs.Dayjs,
@@ -102,13 +102,19 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
       <>
       <DaysRow>
         {day.format("DD-MM-YYYY") === dayjs().format("DD-MM-YYYY") ? (
-          <DayToday>
+            <Day>
+             { !dayView && <div>{Days[day.day()]} </div>}
+            <DayToday>
             <small>{day.format("DD")}</small>
           </DayToday>
-        ) : (
-          <div>
-            <small>{day.format("DD")}</small>
-          </div>
+          </Day>
+          ) : (
+          <Day>
+             { !dayView && <div>{Days[day.day()]} </div>}
+            <div>
+              <small>{day.format("DD")}</small>
+            </div>
+          </Day>
         )}
         </DaysRow>
       <DayContent>
@@ -145,11 +151,11 @@ const DayComponent = ({ day, events = [], smallView }: IDay) => {
                           </small>
                           </div>
                           </EventCard>
-                          );
+                          )
                 })
               }
                 </DayHourDivision>
-              );
+              )
             })
             ) 
             : <></>

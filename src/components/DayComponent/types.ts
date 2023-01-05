@@ -4,7 +4,8 @@ export interface IDay {
   day: dayjs.Dayjs,
   onlyOneDay?: boolean,
   events?: any[],
-  smallView?: boolean
+  smallView?: boolean,
+  dayView?:boolean
 }
 
 export interface QalendarEvent {

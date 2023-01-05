@@ -21,7 +21,7 @@ const DayViewComponent = ({ day, onlyOneDay, events }: IDay) => {
     <>
       <HourColumnComponent></HourColumnComponent>
       {dayList.map((d: any, i: number) => {
-        return <DayComponent events={events} key={i} day={d} />;
+        return <DayComponent dayView={true} events={events} key={i} day={d} />;
       })}
     </>
   );

@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import GlobalContext from "../../contexts/GlobalContext";
 import { ModalContainer, FormModal, LabelForm } from "./styles";
+import {Header, Button, Creation, Small} from "../EditEventModalComponent/styles"
 
 const EventModalComponent = () => {
   const { setShowEventModal, daySelected } = useContext(GlobalContext);
@@ -15,9 +16,9 @@ const EventModalComponent = () => {
     <>
       <ModalContainer onClick={() => setShowEventModal(false)} />
       <FormModal>
-        <header>
-          <button onClick={() => setShowEventModal(false)}>X</button>
-        </header>
+        <Header>
+          <Button onClick={() => setShowEventModal(false)}>X</Button>
+        </Header>
         <h3>Novo Evento</h3>
         <>
           <LabelForm htmlFor="">
@@ -30,7 +31,7 @@ const EventModalComponent = () => {
             />
           </LabelForm>
           <LabelForm>
-            <small>Tipo: </small>
+            <Small>Tipo: </Small>
             <select name="tipo" id="tipo">
               <option value="aula">Aula</option>
               <option value="evento">Evento</option>
@@ -38,14 +39,14 @@ const EventModalComponent = () => {
             </select>
           </LabelForm>
           <LabelForm htmlFor="">
-            <small>Inicio:</small>
+            <Small>Inicio:</Small>
             <input type="datetime-local" onChange={(e) => setInitialTime(e.target.value)} value={initialTime} />
           </LabelForm>
           <LabelForm htmlFor="">
-            <small>Fim:</small>
+            <Small>Fim:</Small>
             <input type="datetime-local"  onChange={(e) => setFinalTime(e.target.value)} value={finalTime}/>
           </LabelForm>
-          <button>Criar Novo</button>
+          <Creation>Criar Novo</Creation>
         </>
       </FormModal>
     </>,

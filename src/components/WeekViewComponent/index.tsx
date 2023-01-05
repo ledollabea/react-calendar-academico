@@ -22,9 +22,7 @@ const WeekViewComponent = ({ week, events = [] }: IWeek) => {
      {!isMobile && qWeek.map((day, ind) => (
         <DayComponent key={ind} day={day.day} events={day.events} smallView={isMobile} />
       ))}
-      {isMobile && qWeek.map((day, ind) => (
-        <NumberDaysComponent key={ind} day={day.day} />
-      ))}
+     
     </>
   );
 };

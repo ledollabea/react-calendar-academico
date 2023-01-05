@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import GlobalContext from "../../contexts/GlobalContext";
-import { ModalContainer, FormModal, LabelForm } from "./styles";
-import {BsTrash} from "react-icons/bs"
+import { ModalContainer, FormModal, LabelForm, Header, Button, Small, Creation } from "./styles";
+import { BsTrash } from "react-icons/bs";
 
 const EditEventModalComponent = () => {
   const { setShowEditEventModal, eventSelected } = useContext(GlobalContext);
@@ -10,27 +10,24 @@ const EditEventModalComponent = () => {
   const [initialTime, setInitialTime] = useState(eventSelected.start!.format("YYYY-MM-DDTHH:mm"));
   const [finalTime, setFinalTime] = useState(eventSelected.end!.format("YYYY-MM-DDTHH:mm"));
 
-  console.log(eventSelected)
-
   return createPortal(
     <>
       <ModalContainer onClick={() => setShowEditEventModal(false)} />
       <FormModal>
-        <header>
-          <button onClick={() => setShowEditEventModal(false)}>X</button>
-          <button><BsTrash/></button>
-        </header>
+        <Header>
+          <Button><BsTrash/></Button>
+          <Button onClick={() => setShowEditEventModal(false)}>X</Button>
+        </Header>
         <h3>Editar Evento</h3>
         <LabelForm htmlFor="">
             <textarea
               rows={4}
               cols={30}
               placeholder={eventSelected.description} maxLength={100}
-              
             />
           </LabelForm>
           <LabelForm>
-            <small>Tipo: </small>
+          <Small>Tipo:</Small>
             <select name="tipo" id="tipo" defaultValue={eventSelected.type}>
               <option value="aula">Aula</option>
               <option value="evento">Evento</option>
@@ -38,14 +35,16 @@ const EditEventModalComponent = () => {
             </select>
           </LabelForm>
           <LabelForm htmlFor="">
-            <small>Inicio:</small>
+            <Small>Inicio:</Small>
             <input type="datetime-local" value={initialTime} onChange={(e) => setInitialTime(e.target.value)} />
           </LabelForm>
           <LabelForm htmlFor="">
-            <small>Fim:</small>
+            <Small>Fim:</Small>
           <input type="datetime-local" value={finalTime} onChange={(e) => setFinalTime(e.target.value)} />
           </LabelForm>
-          <button>Criar Novo</button>
+          <Creation>
+            Editar
+         </Creation>
       </FormModal>
     </>,
     document.getElementById("portal") as HTMLElement

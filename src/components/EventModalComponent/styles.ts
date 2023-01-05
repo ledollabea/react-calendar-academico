@@ -18,10 +18,11 @@ const FormModal = styled.form`
   margin: auto;
   inset: 0;
   background: #fff;
-  border: 1px solid black;
+  border: 1px solid #0000001c;
+  border-radius: 5px;
   height: fit-content;
   width: fit-content;
-  padding: 10px;
+  padding: 20px 30px;
   z-index: 3;
 `;
 
