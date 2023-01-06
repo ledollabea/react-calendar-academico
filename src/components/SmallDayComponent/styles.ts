@@ -84,6 +84,7 @@ ${(props) => props.type == "aula" ? `background: #ffcc66` : props.type == "feria
 const EventList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 `
 
 export { DayContainer, HeaderDay, DayToday, DayHourBlock, EventCard, MonthDaysRow, Day, EventBall, EventList }

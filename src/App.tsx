@@ -22,7 +22,7 @@ function App() {
   const [currentYear, setCurrentYear] = useState(monthView());
   const [currentWeek, setCurrentWeek] = useState(weekView());
   const [currentDay, setCurrentDay] = useState(dayView());
-  const { monthIndex, year, showEventModal, daySelected, showCalendarView, showEditEventModal } =
+  const { monthIndex, year, showEventModal, daySelected, showCalendarView, showEditEventModal, isMobile } =
     useContext(GlobalContext);
 
   useEffect(() => {
@@ -44,17 +44,17 @@ function App() {
     {
       id: 2,
       description: "Palestra: Teste",
-      date: dayjs(new Date(2022, 11, 30)),
-      start: dayjs(new Date(2022, 11, 30, 21, 0)),
+      date: dayjs(new Date(2022, 10, 30)),
+      start: dayjs(new Date(2022, 10, 30, 21, 0)),
       end: dayjs(new Date(2022, 11, 30, 22, 0)),
       type: "evento"
     },
     {
       id: 3,
       description: "Dia de Algo",
-      date: dayjs(new Date(2022, 11, 29)),
-      start: dayjs(new Date(2022, 11, 29, 6, 30)),
-      end: dayjs(new Date(2022, 11, 29, 8, 40)),
+      date: dayjs(new Date(2023, 0, 29)),
+      start: dayjs(new Date(2023, 0, 29, 6, 30)),
+      end: dayjs(new Date(2023, 0, 29, 8, 40)),
       type: "feriado"
     },
     {
@@ -81,7 +81,7 @@ function App() {
         return (
           <DayViewComponent
             day={currentDay}
-            onlyOneDay={false}
+            onlyOneDay={isMobile?true:false}
             events={eventsList}
           />
         );
@@ -110,7 +110,7 @@ function App() {
 
       {
         showCalendarView == CalendarView.DAY ? (
-        <HeaderDays days={[currentDay]} onlyOneDay={false} />
+        <HeaderDays days={[currentDay]} onlyOneDay={isMobile?true:false} />
       ) : (
         showCalendarView == CalendarView.MONTH ?
        ( <HeaderDays withoutHours={showCalendarView == CalendarView.MONTH} />

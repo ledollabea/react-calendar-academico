@@ -20,7 +20,8 @@ const CalendarHeaderComponent = () => {
     daySelected,
     isMobile, 
     showEventModal,
-    setShowEventModal
+    setShowEventModal,
+    setIsLista
   } = useContext(GlobalContext);
 
   const handlePreviousMonth = () => {
@@ -36,14 +37,17 @@ const CalendarHeaderComponent = () => {
   };
   const handleMonthView = () => {
     setShowCalendarView(CalendarView.MONTH);
+    setIsLista(false);
     setMonthIndex(dayjs().month());
   };
   const handleWeekView = () => {
     setShowCalendarView(CalendarView.WEEK);
+    setIsLista(false);
     setDaySelected(dayjs());
   };
   const handleDayView = () => {
     setShowCalendarView(CalendarView.DAY);
+    setIsLista(false);
     setDaySelected(dayjs());
   };
   const handleNextWeek = () => {
@@ -52,6 +56,12 @@ const CalendarHeaderComponent = () => {
   const handlePreviousWeek = () => {
     setDaySelected(daySelected.subtract(1, "week"));
   };
+  const handleNextDay = () => {
+    setDaySelected(daySelected.add(1, "day"))
+  }
+  const handlePreviousDay = () => {
+    setDaySelected(daySelected.subtract(1, "day"))
+  }
 
   const handleClick = () => {
     setShowEventModal(true)
@@ -68,32 +78,41 @@ const CalendarHeaderComponent = () => {
           {showCalendarView == CalendarView.WEEK &&
             daySelected.format("MMMM, YYYY")}
           {showCalendarView == CalendarView.DAY &&
-            daySelected.format("MMMM, YYYY")}
+              daySelected.format("MMMM, YYYY")}
+          <button className="btn-lista" onClick={() => setIsLista(true)}> <p>Lista</p>
+          </button>
         </h3>
         <div>
           <div className="dropdown">
             <FiCalendar className="dropbtn" />
             <div className="dropdown-content">
-              <button className="btn-header" onClick={handleDayView}>Diário</button>
-              <button className="btn-header" onClick={handleWeekView}>Semanal</button>
-              <button className="btn-header" onClick={handleMonthView}>Mensal</button>
+              <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleDayView}>Diário</button>
+              <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleWeekView}>Semanal</button>
+              <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleMonthView}>Mensal</button>
             </div>
           </div>
           <div className="dropdown">
             <FiFilter className="dropbtn" />
             <div className="dropdown-content">
               {showCalendarView == CalendarView.MONTH && (
-                <button className="btn-header" onClick={handlePreviousMonth}> Mês Anterior </button>
+                <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handlePreviousMonth}> Mês Anterior </button>
                 )}
               {showCalendarView == CalendarView.WEEK && (
-                <button className="btn-header" onClick={handlePreviousWeek}> Semana Anterior </button>
+                <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handlePreviousWeek}> Semana Anterior </button>
                 )}
-                <button className="btn-header" onClick={handleToday}>Hoje</button>
+               {showCalendarView == CalendarView.DAY && (
+                <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handlePreviousDay}> Dia Anterior </button>
+                )}
+                <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleToday}>Hoje</button>
               {showCalendarView == CalendarView.MONTH && (
-                <button className="btn-header" onClick={handleNextMonth}> Próximo Mês </button>
+                <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleNextMonth}> Próximo Mês </button>
                 )}
               {showCalendarView == CalendarView.WEEK && (
-                <button className="btn-header" onClick={handleNextWeek}> Próxima Semana </button>
+                <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleNextWeek}> Próxima Semana </button>
+                )}
+               
+              {showCalendarView == CalendarView.DAY && (
+                <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleNextDay}> Próximo dia </button>
                 )}
             </div>
           </div>
@@ -126,13 +145,21 @@ const CalendarHeaderComponent = () => {
                 <GrPrevious onClick={handlePreviousWeek} />
                 <GrNext onClick={handleNextWeek} />
               </>
+              )}
+            {showCalendarView == CalendarView.DAY && (
+              <>
+                <GrPrevious onClick={handlePreviousDay} />
+                <GrNext onClick={handleNextDay} />
+              </>
             )}
+              <button className="btn-lista" onClick={() => setIsLista(true)}> <p>Lista</p>
+              </button>
           </h3>
-        </div>
-      <div className="BLA">
-        <button className="btn-header" onClick={handleDayView}>Diário</button>
-        <button className="btn-header" onClick={handleWeekView}>Semanal</button>
-        <button className="btn-header" onClick={handleMonthView}>Mensal</button>
+          </div>
+      <div className="buttons-header">
+        <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleDayView}>Diário</button>
+        <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleWeekView}>Semanal</button>
+        <button className={isMobile?"btn-header-mobile":"btn-header"} onClick={handleMonthView}>Mensal</button>
       </div>
       </Header>
      <button className="btn-newevent" onClick={handleClick}>

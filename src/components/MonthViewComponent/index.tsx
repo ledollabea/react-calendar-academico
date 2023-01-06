@@ -3,9 +3,10 @@ import GlobalContext from "../../contexts/GlobalContext";
 import SmallDayComponent from "../SmallDayComponent";
 import { MonthContainer, RowContainer } from "./styles";
 import { IMonth } from "./types";
+import ListWeekComponent from "../ListWeekComponent";
 
 const MonthViewComponent = ({ month, events = [] }: IMonth) => {
-  const { isMobile } = useContext(GlobalContext)
+  const { isMobile, isLista } = useContext(GlobalContext)
   const eventList = events.filter(({ date }) => {
     return !!month.find(
       (i) =>
@@ -14,6 +15,7 @@ const MonthViewComponent = ({ month, events = [] }: IMonth) => {
   });
 
   return (
+    (!isLista) ?
     <MonthContainer>
       <>
         {month.map((row, i) => (
@@ -29,7 +31,15 @@ const MonthViewComponent = ({ month, events = [] }: IMonth) => {
           </RowContainer>
         ))}
       </>
-    </MonthContainer>
+      </MonthContainer>
+      :
+      <MonthContainer>
+      <>
+        {month.map((row, i) => (
+          <ListWeekComponent key={i} week={row} events={eventList}/>
+        ))}
+      </>
+      </MonthContainer>
   );
 };
 

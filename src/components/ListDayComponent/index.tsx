@@ -4,11 +4,11 @@ import { IDay } from "../DayComponent/types";
 import { Container, DayContainer, DayInfo, Description, EventContainer, EventInfo, Time } from "./styles";
 
 const ListDayComponent = ({ day, events }: IDay) => {
-  const { isMobile } = useContext(GlobalContext)
-  const Days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]
+  const { isMobile, isLista } = useContext(GlobalContext)
+  const Days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
   
     return (
-    isMobile ?
+    (isMobile || isLista) ?
     <Container>
       <DayContainer>
           <DayInfo>

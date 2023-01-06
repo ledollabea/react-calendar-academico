@@ -16,6 +16,8 @@ const ContextWrapper = ({ children }: { children: JSX.Element }) => {
   const [eventSelected, setEventSelected] = useState({});
   //SET SCREEN SIZE
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  // CHOICE FOR LIST
+  const [isLista, setIsLista] = useState(false);
 
   const updateMedia = () => {
     setIsMobile(window.innerWidth <=  768);
@@ -43,7 +45,9 @@ const ContextWrapper = ({ children }: { children: JSX.Element }) => {
         showEditEventModal,
         setShowEditEventModal,
         eventSelected,
-        setEventSelected
+        setEventSelected,
+        isLista,
+        setIsLista
       }}
     >
       {children}

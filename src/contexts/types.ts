@@ -18,7 +18,9 @@ export interface IGlobalContext {
   showEditEventModal: boolean,
   setShowEditEventModal: Dispatch<SetStateAction<boolean>>,
   eventSelected: QalendarEvent,
-  setEventSelected: Dispatch<SetStateAction<QalendarEvent>>
+  setEventSelected: Dispatch<SetStateAction<QalendarEvent>>,
+  isLista: boolean,
+  setIsLista: Dispatch<SetStateAction<boolean>>,
 }
 
 export enum CalendarView {

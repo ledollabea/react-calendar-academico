@@ -1,8 +1,10 @@
-import React from "react";
 import { Header, NameDay } from "./styles";
 import dayjs from "dayjs";
+import { useContext } from "react";
+import GlobalContext from "../../contexts/GlobalContext";
 
 const HeaderDays = (props: any) => {
+  const { isLista} = useContext(GlobalContext)
   let weekDaysNames = [
     "Domingo",
     "Segunda-Feira",
@@ -28,8 +30,10 @@ const HeaderDays = (props: any) => {
     : weekDaysNames.map((day, index) => index);
   let nameSize = props.nameSize ?? 3;
   return (
+    <>
+    {!isLista &&
     <Header
-      style={props.withoutHours ? { paddingLeft: "0px", width: "100%" } : {}}
+    style={props.withoutHours ? { paddingLeft: "0px", width: "100%" } : {}}
     >
       {weekDaysToShow.map((weekDay: number, index: number) => {
         return (
@@ -38,7 +42,8 @@ const HeaderDays = (props: any) => {
           </NameDay>
         );
       })}
-    </Header>
+    </Header>}
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ import NumberDaysComponent from "../NumberDaysComponent";
 import ListDayComponent from "../ListDayComponent";
 
 const WeekViewComponent = ({ week, events = [] }: IWeek) => {
-  const { isMobile, } = useContext(GlobalContext)
+  const { isMobile, isLista } = useContext(GlobalContext)
   const qWeek = week.map((day) => {
     return {
       day: day,
@@ -18,8 +18,8 @@ const WeekViewComponent = ({ week, events = [] }: IWeek) => {
 
   return (
     <>
-     {!isMobile && <HourColumnComponent />}
-     {!isMobile && qWeek.map((day, ind) => (
+     {(!isMobile && !isLista) && <HourColumnComponent />}
+     {(!isMobile && !isLista) && qWeek.map((day, ind) => (
         <DayComponent key={ind} day={day.day} events={day.events} smallView={isMobile} />
       ))}
      

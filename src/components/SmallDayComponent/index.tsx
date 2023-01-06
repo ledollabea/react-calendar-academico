@@ -28,7 +28,8 @@ const SmallDayComponent = ({ day, events = [], smallView }: IDay) => {
   
 
   return (
-    <DayContainer >
+    <>
+    <DayContainer onClick={() => {smallView? console.log("inhai"):""}} >
       <MonthDaysRow>
         {day.format("DD-MM-YYYY") === dayjs().format("DD-MM-YYYY") ? (
           <DayToday>
@@ -44,16 +45,17 @@ const SmallDayComponent = ({ day, events = [], smallView }: IDay) => {
           
           return (
             smallView ?
-              <EventBall type={event.type} key={i} onClick={() => handleEventSelect(event)}/>
-              :
-              <EventCard key={i} type={event.type} onClick={() => handleEventSelect(event)}>
-                <small>{event.description}</small>
-              </EventCard>
+            <EventBall type={event.type} key={i}/>
+            :
+            <EventCard key={i} type={event.type} onClick={() => handleEventSelect(event)}>
+            <small>{event.description}</small>
+            </EventCard>
             );
           })}
           </EventList>
       </MonthDaysRow>
     </DayContainer>
+    </>
   );
 };
 

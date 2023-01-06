@@ -26,9 +26,22 @@
 }
 .btn-header {
   background-color: #f9f9f9;
-  border: none;
+  border: 1px solid #0000001c;
+  border-radius: 5px;
+  margin: 2px;
   width: 100%;
+  padding: 10px 20px;
 }
+
+.btn-header-mobile {
+  background-color: #f9f9f9;
+  border: none;
+  margin: 2px;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+
 .dropdown-content button:hover {background-color: #f1f1f1}
 
 .dropdown:hover .dropdown-content {
@@ -47,6 +60,20 @@
   margin-bottom: 10px;
 
 }
-.BLA{
+.buttons-header{
   display: flex;
+}
+
+.btn-lista{
+  background-color: transparent;
+  border: none;
+  padding: 0 10px;
+}
+
+.btn-lista > p{
+  text-align: center;
+  background-color:#f9f9f9 ;
+  padding: 10px 20px;
+  border: 1px solid #0000001c;
+  border-radius: 5px;
 }
